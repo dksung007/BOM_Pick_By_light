@@ -1,0 +1,761 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="similanwms_nhkModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="bom_detail">
+          <Key>
+            <PropertyRef Name="row_id" />
+          </Key>
+          <Property Name="client" Type="nvarchar" MaxLength="50" />
+          <Property Name="setcode" Type="nvarchar" MaxLength="50" />
+          <Property Name="version" Type="nvarchar" MaxLength="20" />
+          <Property Name="item_no" Type="nvarchar" MaxLength="50" />
+          <Property Name="uom" Type="nvarchar" MaxLength="50" />
+          <Property Name="qty" Type="numeric" Precision="13" Scale="0" />
+          <Property Name="unit_cost" Type="numeric" Precision="13" Scale="2" />
+          <Property Name="total_cost" Type="numeric" Precision="13" Scale="2" />
+          <Property Name="maker" Type="nvarchar" MaxLength="50" />
+          <Property Name="last_update" Type="nvarchar" MaxLength="50" />
+          <Property Name="created_by" Type="nvarchar" MaxLength="50" />
+          <Property Name="created_date" Type="datetime" />
+          <Property Name="row_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="bom_master">
+          <Key>
+            <PropertyRef Name="setcode" />
+          </Key>
+          <Property Name="client" Type="nvarchar" MaxLength="50" />
+          <Property Name="setcode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="50" />
+          <Property Name="version" Type="nvarchar" MaxLength="50" />
+          <Property Name="status" Type="nvarchar" MaxLength="50" />
+          <Property Name="currency" Type="nvarchar" MaxLength="50" />
+          <Property Name="standard_cost" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="maker" Type="nvarchar" MaxLength="50" />
+          <Property Name="last_update" Type="nvarchar" MaxLength="50" />
+          <Property Name="created_by" Type="nvarchar" MaxLength="50" />
+          <Property Name="created_date" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'similanwms_nhk.dbo.product_barcode' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="product_barcode">
+          <Property Name="client" Type="nvarchar" MaxLength="50" />
+          <Property Name="barcode_no" Type="nvarchar" MaxLength="50" />
+          <Property Name="item_no" Type="nvarchar" MaxLength="50" />
+          <Property Name="pack_uom" Type="nvarchar" MaxLength="50" />
+          <Property Name="base_uom" Type="nvarchar" MaxLength="50" />
+          <Property Name="convert_qty" Type="numeric" Precision="15" Scale="3" />
+          <Property Name="last_update" Type="datetime" />
+          <Property Name="maker" Type="nvarchar" MaxLength="50" />
+          <Property Name="remark" Type="nvarchar" MaxLength="255" />
+        </EntityType>-->
+        <EntityType Name="product_master">
+          <Key>
+            <PropertyRef Name="row_id" />
+          </Key>
+          <Property Name="row_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="client" Type="nvarchar" MaxLength="50" />
+          <Property Name="item_no" Type="nvarchar" MaxLength="50" />
+          <Property Name="product_class" Type="nvarchar" MaxLength="50" />
+          <Property Name="description" Type="nvarchar" MaxLength="400" />
+          <Property Name="pallet_config" Type="nvarchar" MaxLength="50" />
+          <Property Name="alternate_code" Type="nvarchar" MaxLength="50" />
+          <Property Name="substitute" Type="nvarchar" MaxLength="50" />
+          <Property Name="billing_group" Type="nvarchar" MaxLength="50" />
+          <Property Name="billing_uom" Type="nvarchar" MaxLength="50" />
+          <Property Name="storage_group" Type="nvarchar" MaxLength="50" />
+          <Property Name="storage_uom" Type="nvarchar" MaxLength="50" />
+          <Property Name="brand" Type="nvarchar" MaxLength="50" />
+          <Property Name="product_group" Type="nvarchar" MaxLength="50" />
+          <Property Name="category" Type="nvarchar" MaxLength="50" />
+          <Property Name="sub_category" Type="nvarchar" MaxLength="50" />
+          <Property Name="sub_category_1" Type="nvarchar" MaxLength="50" />
+          <Property Name="sub_category_2" Type="nvarchar" MaxLength="50" />
+          <Property Name="sub_category_3" Type="nvarchar" MaxLength="50" />
+          <Property Name="sub_category_4" Type="nvarchar" MaxLength="50" />
+          <Property Name="sub_category_5" Type="nvarchar" MaxLength="200" />
+          <Property Name="abc_classification" Type="nvarchar" MaxLength="50" />
+          <Property Name="abc_value" Type="nvarchar" MaxLength="50" />
+          <Property Name="cycle_count_frequency" Type="numeric" Precision="3" Scale="0" />
+          <Property Name="last_cycle_count" Type="datetime" />
+          <Property Name="last_stocktake" Type="datetime" />
+          <Property Name="image_filename" Type="nvarchar" MaxLength="80" />
+          <Property Name="dg_flag" Type="nvarchar" MaxLength="50" />
+          <Property Name="un_code" Type="nvarchar" MaxLength="50" />
+          <Property Name="hazchem_code" Type="nvarchar" MaxLength="50" />
+          <Property Name="imo_class" Type="nvarchar" MaxLength="50" />
+          <Property Name="pick_seq" Type="nvarchar" MaxLength="50" />
+          <Property Name="default_grade" Type="nvarchar" MaxLength="50" />
+          <Property Name="status" Type="nvarchar" MaxLength="50" />
+          <Property Name="tolerance" Type="numeric" Precision="15" Scale="3" />
+          <Property Name="sample_size" Type="numeric" Precision="15" Scale="3" />
+          <Property Name="quarantine_day" Type="int" />
+          <Property Name="pick_tolerance" Type="numeric" Precision="18" Scale="6" />
+          <Property Name="reorder_level" Type="numeric" Precision="15" Scale="3" />
+          <Property Name="max_stock" Type="numeric" Precision="15" Scale="3" />
+          <Property Name="currency" Type="nvarchar" MaxLength="50" />
+          <Property Name="fob_price" Type="numeric" Precision="13" Scale="4" />
+          <Property Name="landed_price" Type="numeric" Precision="13" Scale="4" />
+          <Property Name="ex_work_price" Type="numeric" Precision="13" Scale="4" />
+          <Property Name="retail_price" Type="numeric" Precision="13" Scale="4" />
+          <Property Name="dealer_price" Type="numeric" Precision="13" Scale="4" />
+          <Property Name="export_price" Type="numeric" Precision="13" Scale="4" />
+          <Property Name="expiry_prealert" Type="int" />
+          <Property Name="shelf_life" Type="numeric" Precision="5" Scale="0" />
+          <Property Name="num_serial" Type="numeric" Precision="5" Scale="0" />
+          <Property Name="dual_uom" Type="nvarchar" MaxLength="2" />
+          <Property Name="auto_zoning" Type="nvarchar" MaxLength="2" />
+          <Property Name="stack_factor" Type="numeric" Precision="5" Scale="0" />
+          <Property Name="bonded_flag" Type="nvarchar" MaxLength="2" />
+          <Property Name="batch_no" Type="nvarchar" MaxLength="2" />
+          <Property Name="lot_no" Type="nvarchar" MaxLength="2" />
+          <Property Name="expiry_dt" Type="nvarchar" MaxLength="2" />
+          <Property Name="production_dt" Type="nvarchar" MaxLength="2" />
+          <Property Name="item_size" Type="nvarchar" MaxLength="2" />
+          <Property Name="item_color" Type="nvarchar" MaxLength="2" />
+          <Property Name="item_class" Type="nvarchar" MaxLength="2" />
+          <Property Name="weight_required" Type="nvarchar" MaxLength="2" />
+          <Property Name="dimensions" Type="nvarchar" MaxLength="2" />
+          <Property Name="serial_no" Type="nvarchar" MaxLength="2" />
+          <Property Name="supplier" Type="nvarchar" MaxLength="2" />
+          <Property Name="owner" Type="nvarchar" MaxLength="2" />
+          <Property Name="country_origin" Type="nvarchar" MaxLength="2" />
+          <Property Name="nonstandard_pack" Type="nvarchar" MaxLength="2" />
+          <Property Name="others" Type="nvarchar" MaxLength="50" />
+          <Property Name="remarks" Type="nvarchar" MaxLength="255" />
+          <Property Name="create_by" Type="nvarchar" MaxLength="50" />
+          <Property Name="create_date" Type="datetime" />
+          <Property Name="maker" Type="nvarchar" MaxLength="50" />
+          <Property Name="last_update" Type="datetime" />
+          <Property Name="nesting_factor" Type="numeric" Precision="8" Scale="5" />
+          <Property Name="inventory_holding_factor" Type="numeric" Precision="5" Scale="2" />
+          <Property Name="hs_code" Type="nvarchar" MaxLength="50" />
+          <Property Name="hs_code_region" Type="nvarchar" MaxLength="50" />
+          <Property Name="net_weight" Type="numeric" Precision="28" Scale="3" />
+          <Property Name="remark2" Type="nvarchar" MaxLength="255" />
+          <Property Name="degree_fr" Type="numeric" Precision="8" Scale="2" />
+          <Property Name="degree_to" Type="numeric" Precision="8" Scale="2" />
+          <Property Name="humidity" Type="numeric" Precision="8" Scale="3" />
+          <Property Name="ship_packing" Type="nvarchar" MaxLength="50" />
+          <Property Name="healthcare_data" Type="nvarchar" MaxLength="512" />
+          <Property Name="origin_country" Type="nvarchar" MaxLength="50" />
+          <Property Name="item_version" Type="nvarchar" MaxLength="50" />
+          <Property Name="catch_weight_flag" Type="nvarchar" MaxLength="2" />
+          <Property Name="discount" Type="numeric" Precision="18" Scale="4" />
+          <Property Name="unit_price" Type="numeric" Precision="18" Scale="4" />
+          <Property Name="uom_3pl_chrg" Type="nvarchar" MaxLength="50" />
+          <Property Name="square_item" Type="numeric" Precision="18" Scale="4" />
+          <Property Name="cubic_item" Type="numeric" Precision="18" Scale="4" />
+          <Property Name="serial_item" Type="nvarchar" MaxLength="50" />
+          <Property Name="min_pick_face" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="max_pick_face" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="unit_cost" Type="numeric" Precision="18" Scale="4" />
+          <Property Name="packing_uom" Type="nvarchar" MaxLength="50" />
+          <Property Name="qty_loose" Type="numeric" Precision="18" Scale="3" />
+          <Property Name="uom_loose" Type="nvarchar" MaxLength="50" />
+          <Property Name="sap_codeap" Type="nvarchar" MaxLength="50" />
+          <Property Name="sap_codear" Type="nvarchar" MaxLength="50" />
+          <Property Name="check3pl" Type="nvarchar" MaxLength="5" />
+          <Property Name="Picture1" Type="image" />
+          <Property Name="Picture2" Type="image" />
+          <Property Name="Picture3" Type="image" />
+          <Property Name="Picture4" Type="image" />
+          <Property Name="Primary_Risk" Type="nvarchar" MaxLength="50" />
+          <Property Name="Secondary_Risk" Type="nvarchar" MaxLength="50" />
+          <Property Name="Danger_Type" Type="nvarchar" MaxLength="50" />
+          <Property Name="Allow_Number" Type="nvarchar" MaxLength="50" />
+          <Property Name="Hazardous_Substances_Type" Type="nvarchar" MaxLength="50" />
+          <Property Name="Physical_Type_Of_Chemicals" Type="nvarchar" MaxLength="50" />
+          <Property Name="UN_Number" Type="nvarchar" MaxLength="50" />
+          <Property Name="Packing_Group" Type="nvarchar" MaxLength="50" />
+          <Property Name="UN_Packaging_Code" Type="nvarchar" MaxLength="50" />
+          <Property Name="Ambient_Temperaturn" Type="nvarchar" MaxLength="50" />
+          <Property Name="li_regis_no" Type="nvarchar" MaxLength="50" />
+          <Property Name="li_imported_no" Type="nvarchar" MaxLength="50" />
+          <Property Name="li_dangerous_name" Type="nvarchar" MaxLength="100" />
+          <Property Name="li_qty" Type="numeric" Precision="18" Scale="3" />
+          <Property Name="li_uom" Type="nvarchar" MaxLength="50" />
+          <Property Name="li_pass" Type="nvarchar" MaxLength="1" />
+          <Property Name="li_area" Type="numeric" Precision="18" Scale="3" />
+          <Property Name="li_expire_date" Type="datetime" />
+          <Property Name="issue_date" Type="datetime" />
+          <Property Name="cas_no" Type="nvarchar" MaxLength="50" />
+          <Property Name="ratio_des" Type="nvarchar" MaxLength="100" />
+          <Property Name="gross_wgt" Type="numeric" Precision="18" Scale="3" />
+          <Property Name="min_qty" Type="decimal" Precision="18" Scale="3" />
+          <Property Name="max_qty" Type="decimal" Precision="18" Scale="3" />
+          <Property Name="replenish_uom" Type="nvarchar" MaxLength="50" />
+          <Property Name="n_code" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'similanwms_nhk.dbo.product_uom' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="product_uom">
+          <Key>
+            <PropertyRef Name="row_id" />
+          </Key>
+          <Property Name="row_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="client" Type="nvarchar" MaxLength="50" />
+          <Property Name="item_no" Type="nvarchar" MaxLength="50" />
+          <Property Name="item_packing" Type="nvarchar" MaxLength="50" />
+          <Property Name="item_uom" Type="nvarchar" MaxLength="50" />
+          <Property Name="item_qty" Type="numeric" Precision="15" Scale="3" />
+          <Property Name="item_height" Type="numeric" Precision="20" Scale="3" />
+          <Property Name="item_width" Type="numeric" Precision="20" Scale="3" />
+          <Property Name="item_depth" Type="numeric" Precision="20" Scale="3" />
+          <Property Name="item_volume" Type="numeric" Precision="28" Scale="15" />
+          <Property Name="item_weight" Type="numeric" Precision="28" Scale="15" />
+          <Property Name="uom_sequence" Type="int" />
+          <Property Name="lowest_uom" Type="nvarchar" MaxLength="50" />
+          <Property Name="luom_equivalent" Type="numeric" Precision="15" Scale="3" />
+          <Property Name="pack_hierarchy" Type="smallint" />
+          <Property Name="create_date" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'similanwms_nhk.dbo.product_uom_temp' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="product_uom_temp">
+          <Key>
+            <PropertyRef Name="row_id" />
+          </Key>
+          <Property Name="row_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="key_num" Type="nvarchar" MaxLength="50" />
+          <Property Name="client" Type="nvarchar" MaxLength="50" />
+          <Property Name="item_no" Type="nvarchar" MaxLength="50" />
+          <Property Name="item_packing" Type="nvarchar" MaxLength="50" />
+          <Property Name="item_uom" Type="nvarchar" MaxLength="50" />
+          <Property Name="item_qty" Type="numeric" Precision="15" Scale="3" />
+          <Property Name="item_height" Type="numeric" Precision="8" Scale="3" />
+          <Property Name="item_width" Type="numeric" Precision="8" Scale="3" />
+          <Property Name="item_depth" Type="numeric" Precision="8" Scale="3" />
+          <Property Name="item_volume" Type="numeric" Precision="28" Scale="15" />
+          <Property Name="item_weight" Type="numeric" Precision="28" Scale="15" />
+          <Property Name="uom_sequence" Type="int" />
+          <Property Name="lowest_uom" Type="nvarchar" MaxLength="50" />
+          <Property Name="luom_equivalent" Type="numeric" Precision="15" Scale="3" />
+          <Property Name="pack_hierarchy" Type="smallint" />
+          <Property Name="create_date" Type="datetime" />
+        </EntityType>
+        <EntityContainer Name="similanwms_nhkModelStoreContainer">
+          <EntitySet Name="bom_detail" EntityType="Self.bom_detail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="bom_master" EntityType="Self.bom_master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="product_master" EntityType="Self.product_master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="product_uom" EntityType="Self.product_uom" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [product_uom].[row_id] AS [row_id], 
+    [product_uom].[client] AS [client], 
+    [product_uom].[item_no] AS [item_no], 
+    [product_uom].[item_packing] AS [item_packing], 
+    [product_uom].[item_uom] AS [item_uom], 
+    [product_uom].[item_qty] AS [item_qty], 
+    [product_uom].[item_height] AS [item_height], 
+    [product_uom].[item_width] AS [item_width], 
+    [product_uom].[item_depth] AS [item_depth], 
+    [product_uom].[item_volume] AS [item_volume], 
+    [product_uom].[item_weight] AS [item_weight], 
+    [product_uom].[uom_sequence] AS [uom_sequence], 
+    [product_uom].[lowest_uom] AS [lowest_uom], 
+    [product_uom].[luom_equivalent] AS [luom_equivalent], 
+    [product_uom].[pack_hierarchy] AS [pack_hierarchy], 
+    [product_uom].[create_date] AS [create_date]
+    FROM [dbo].[product_uom] AS [product_uom]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="product_uom_temp" EntityType="Self.product_uom_temp" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [product_uom_temp].[row_id] AS [row_id], 
+    [product_uom_temp].[key_num] AS [key_num], 
+    [product_uom_temp].[client] AS [client], 
+    [product_uom_temp].[item_no] AS [item_no], 
+    [product_uom_temp].[item_packing] AS [item_packing], 
+    [product_uom_temp].[item_uom] AS [item_uom], 
+    [product_uom_temp].[item_qty] AS [item_qty], 
+    [product_uom_temp].[item_height] AS [item_height], 
+    [product_uom_temp].[item_width] AS [item_width], 
+    [product_uom_temp].[item_depth] AS [item_depth], 
+    [product_uom_temp].[item_volume] AS [item_volume], 
+    [product_uom_temp].[item_weight] AS [item_weight], 
+    [product_uom_temp].[uom_sequence] AS [uom_sequence], 
+    [product_uom_temp].[lowest_uom] AS [lowest_uom], 
+    [product_uom_temp].[luom_equivalent] AS [luom_equivalent], 
+    [product_uom_temp].[pack_hierarchy] AS [pack_hierarchy], 
+    [product_uom_temp].[create_date] AS [create_date]
+    FROM [dbo].[product_uom_temp] AS [product_uom_temp]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="similanwms_nhkModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="similanwms_nhkEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="bom_master" EntityType="similanwms_nhkModel.bom_master" />
+          <EntitySet Name="bom_detail" EntityType="similanwms_nhkModel.bom_detail" />
+          <EntitySet Name="product_master" EntityType="similanwms_nhkModel.product_master" />
+          <EntitySet Name="product_uom" EntityType="similanwms_nhkModel.product_uom" />
+          <EntitySet Name="product_uom_temp" EntityType="similanwms_nhkModel.product_uom_temp" />
+        </EntityContainer>
+        <EntityType Name="bom_master">
+          <Key>
+            <PropertyRef Name="setcode" />
+          </Key>
+          <Property Name="client" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="setcode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="version" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="currency" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="standard_cost" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="maker" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="last_update" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="created_by" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="created_date" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="bom_detail">
+          <Key>
+            <PropertyRef Name="row_id" />
+          </Key>
+          <Property Name="client" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="setcode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="version" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="item_no" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="uom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="qty" Type="Decimal" Precision="13" Scale="0" />
+          <Property Name="unit_cost" Type="Decimal" Precision="13" Scale="2" />
+          <Property Name="total_cost" Type="Decimal" Precision="13" Scale="2" />
+          <Property Name="maker" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="last_update" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="created_by" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="created_date" Type="DateTime" Precision="3" />
+          <Property Name="row_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="product_master">
+          <Key>
+            <PropertyRef Name="row_id" />
+          </Key>
+          <Property Name="row_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="client" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="item_no" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="product_class" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="pallet_config" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="alternate_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="substitute" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="billing_group" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="billing_uom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="storage_group" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="storage_uom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="brand" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="product_group" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="sub_category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="sub_category_1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="sub_category_2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="sub_category_3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="sub_category_4" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="sub_category_5" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="abc_classification" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="abc_value" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="cycle_count_frequency" Type="Decimal" Precision="3" Scale="0" />
+          <Property Name="last_cycle_count" Type="DateTime" Precision="3" />
+          <Property Name="last_stocktake" Type="DateTime" Precision="3" />
+          <Property Name="image_filename" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="dg_flag" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="un_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="hazchem_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="imo_class" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="pick_seq" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="default_grade" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="tolerance" Type="Decimal" Precision="15" Scale="3" />
+          <Property Name="sample_size" Type="Decimal" Precision="15" Scale="3" />
+          <Property Name="quarantine_day" Type="Int32" />
+          <Property Name="pick_tolerance" Type="Decimal" Precision="18" Scale="6" />
+          <Property Name="reorder_level" Type="Decimal" Precision="15" Scale="3" />
+          <Property Name="max_stock" Type="Decimal" Precision="15" Scale="3" />
+          <Property Name="currency" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fob_price" Type="Decimal" Precision="13" Scale="4" />
+          <Property Name="landed_price" Type="Decimal" Precision="13" Scale="4" />
+          <Property Name="ex_work_price" Type="Decimal" Precision="13" Scale="4" />
+          <Property Name="retail_price" Type="Decimal" Precision="13" Scale="4" />
+          <Property Name="dealer_price" Type="Decimal" Precision="13" Scale="4" />
+          <Property Name="export_price" Type="Decimal" Precision="13" Scale="4" />
+          <Property Name="expiry_prealert" Type="Int32" />
+          <Property Name="shelf_life" Type="Decimal" Precision="5" Scale="0" />
+          <Property Name="num_serial" Type="Decimal" Precision="5" Scale="0" />
+          <Property Name="dual_uom" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="auto_zoning" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="stack_factor" Type="Decimal" Precision="5" Scale="0" />
+          <Property Name="bonded_flag" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="batch_no" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="lot_no" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="expiry_dt" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="production_dt" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="item_size" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="item_color" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="item_class" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="weight_required" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="dimensions" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="serial_no" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="supplier" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="owner" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="country_origin" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="nonstandard_pack" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="others" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="remarks" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="create_by" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="create_date" Type="DateTime" Precision="3" />
+          <Property Name="maker" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="last_update" Type="DateTime" Precision="3" />
+          <Property Name="nesting_factor" Type="Decimal" Precision="8" Scale="5" />
+          <Property Name="inventory_holding_factor" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="hs_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="hs_code_region" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="net_weight" Type="Decimal" Precision="28" Scale="3" />
+          <Property Name="remark2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="degree_fr" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="degree_to" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="humidity" Type="Decimal" Precision="8" Scale="3" />
+          <Property Name="ship_packing" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="healthcare_data" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="origin_country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="item_version" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="catch_weight_flag" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="discount" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="unit_price" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="uom_3pl_chrg" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="square_item" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="cubic_item" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="serial_item" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="min_pick_face" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="max_pick_face" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="unit_cost" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="packing_uom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="qty_loose" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="uom_loose" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="sap_codeap" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="sap_codear" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="check3pl" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="Picture1" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Picture2" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Picture3" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Picture4" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Primary_Risk" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Secondary_Risk" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Danger_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Allow_Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Hazardous_Substances_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Physical_Type_Of_Chemicals" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UN_Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Packing_Group" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UN_Packaging_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Ambient_Temperaturn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="li_regis_no" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="li_imported_no" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="li_dangerous_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="li_qty" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="li_uom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="li_pass" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="li_area" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="li_expire_date" Type="DateTime" Precision="3" />
+          <Property Name="issue_date" Type="DateTime" Precision="3" />
+          <Property Name="cas_no" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ratio_des" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="gross_wgt" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="min_qty" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="max_qty" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="replenish_uom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="n_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="product_uom">
+          <Key>
+            <PropertyRef Name="row_id" />
+          </Key>
+          <Property Name="row_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="client" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="item_no" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="item_packing" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="item_uom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="item_qty" Type="Decimal" Precision="15" Scale="3" />
+          <Property Name="item_height" Type="Decimal" Precision="20" Scale="3" />
+          <Property Name="item_width" Type="Decimal" Precision="20" Scale="3" />
+          <Property Name="item_depth" Type="Decimal" Precision="20" Scale="3" />
+          <Property Name="item_volume" Type="Decimal" Precision="28" Scale="15" />
+          <Property Name="item_weight" Type="Decimal" Precision="28" Scale="15" />
+          <Property Name="uom_sequence" Type="Int32" />
+          <Property Name="lowest_uom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="luom_equivalent" Type="Decimal" Precision="15" Scale="3" />
+          <Property Name="pack_hierarchy" Type="Int16" />
+          <Property Name="create_date" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="product_uom_temp">
+          <Key>
+            <PropertyRef Name="row_id" />
+          </Key>
+          <Property Name="row_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="key_num" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="client" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="item_no" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="item_packing" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="item_uom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="item_qty" Type="Decimal" Precision="15" Scale="3" />
+          <Property Name="item_height" Type="Decimal" Precision="8" Scale="3" />
+          <Property Name="item_width" Type="Decimal" Precision="8" Scale="3" />
+          <Property Name="item_depth" Type="Decimal" Precision="8" Scale="3" />
+          <Property Name="item_volume" Type="Decimal" Precision="28" Scale="15" />
+          <Property Name="item_weight" Type="Decimal" Precision="28" Scale="15" />
+          <Property Name="uom_sequence" Type="Int32" />
+          <Property Name="lowest_uom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="luom_equivalent" Type="Decimal" Precision="15" Scale="3" />
+          <Property Name="pack_hierarchy" Type="Int16" />
+          <Property Name="create_date" Type="DateTime" Precision="3" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="similanwms_nhkModelStoreContainer" CdmEntityContainer="similanwms_nhkEntities">
+          <EntitySetMapping Name="bom_master">
+            <EntityTypeMapping TypeName="similanwms_nhkModel.bom_master">
+              <MappingFragment StoreEntitySet="bom_master">
+                <ScalarProperty Name="created_date" ColumnName="created_date" />
+                <ScalarProperty Name="created_by" ColumnName="created_by" />
+                <ScalarProperty Name="last_update" ColumnName="last_update" />
+                <ScalarProperty Name="maker" ColumnName="maker" />
+                <ScalarProperty Name="standard_cost" ColumnName="standard_cost" />
+                <ScalarProperty Name="currency" ColumnName="currency" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="setcode" ColumnName="setcode" />
+                <ScalarProperty Name="client" ColumnName="client" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="bom_detail">
+            <EntityTypeMapping TypeName="similanwms_nhkModel.bom_detail">
+              <MappingFragment StoreEntitySet="bom_detail">
+                <ScalarProperty Name="row_id" ColumnName="row_id" />
+                <ScalarProperty Name="created_date" ColumnName="created_date" />
+                <ScalarProperty Name="created_by" ColumnName="created_by" />
+                <ScalarProperty Name="last_update" ColumnName="last_update" />
+                <ScalarProperty Name="maker" ColumnName="maker" />
+                <ScalarProperty Name="total_cost" ColumnName="total_cost" />
+                <ScalarProperty Name="unit_cost" ColumnName="unit_cost" />
+                <ScalarProperty Name="qty" ColumnName="qty" />
+                <ScalarProperty Name="uom" ColumnName="uom" />
+                <ScalarProperty Name="item_no" ColumnName="item_no" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="setcode" ColumnName="setcode" />
+                <ScalarProperty Name="client" ColumnName="client" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="product_master">
+            <EntityTypeMapping TypeName="similanwms_nhkModel.product_master">
+              <MappingFragment StoreEntitySet="product_master">
+                <ScalarProperty Name="n_code" ColumnName="n_code" />
+                <ScalarProperty Name="replenish_uom" ColumnName="replenish_uom" />
+                <ScalarProperty Name="max_qty" ColumnName="max_qty" />
+                <ScalarProperty Name="min_qty" ColumnName="min_qty" />
+                <ScalarProperty Name="gross_wgt" ColumnName="gross_wgt" />
+                <ScalarProperty Name="ratio_des" ColumnName="ratio_des" />
+                <ScalarProperty Name="cas_no" ColumnName="cas_no" />
+                <ScalarProperty Name="issue_date" ColumnName="issue_date" />
+                <ScalarProperty Name="li_expire_date" ColumnName="li_expire_date" />
+                <ScalarProperty Name="li_area" ColumnName="li_area" />
+                <ScalarProperty Name="li_pass" ColumnName="li_pass" />
+                <ScalarProperty Name="li_uom" ColumnName="li_uom" />
+                <ScalarProperty Name="li_qty" ColumnName="li_qty" />
+                <ScalarProperty Name="li_dangerous_name" ColumnName="li_dangerous_name" />
+                <ScalarProperty Name="li_imported_no" ColumnName="li_imported_no" />
+                <ScalarProperty Name="li_regis_no" ColumnName="li_regis_no" />
+                <ScalarProperty Name="Ambient_Temperaturn" ColumnName="Ambient_Temperaturn" />
+                <ScalarProperty Name="UN_Packaging_Code" ColumnName="UN_Packaging_Code" />
+                <ScalarProperty Name="Packing_Group" ColumnName="Packing_Group" />
+                <ScalarProperty Name="UN_Number" ColumnName="UN_Number" />
+                <ScalarProperty Name="Physical_Type_Of_Chemicals" ColumnName="Physical_Type_Of_Chemicals" />
+                <ScalarProperty Name="Hazardous_Substances_Type" ColumnName="Hazardous_Substances_Type" />
+                <ScalarProperty Name="Allow_Number" ColumnName="Allow_Number" />
+                <ScalarProperty Name="Danger_Type" ColumnName="Danger_Type" />
+                <ScalarProperty Name="Secondary_Risk" ColumnName="Secondary_Risk" />
+                <ScalarProperty Name="Primary_Risk" ColumnName="Primary_Risk" />
+                <ScalarProperty Name="Picture4" ColumnName="Picture4" />
+                <ScalarProperty Name="Picture3" ColumnName="Picture3" />
+                <ScalarProperty Name="Picture2" ColumnName="Picture2" />
+                <ScalarProperty Name="Picture1" ColumnName="Picture1" />
+                <ScalarProperty Name="check3pl" ColumnName="check3pl" />
+                <ScalarProperty Name="sap_codear" ColumnName="sap_codear" />
+                <ScalarProperty Name="sap_codeap" ColumnName="sap_codeap" />
+                <ScalarProperty Name="uom_loose" ColumnName="uom_loose" />
+                <ScalarProperty Name="qty_loose" ColumnName="qty_loose" />
+                <ScalarProperty Name="packing_uom" ColumnName="packing_uom" />
+                <ScalarProperty Name="unit_cost" ColumnName="unit_cost" />
+                <ScalarProperty Name="max_pick_face" ColumnName="max_pick_face" />
+                <ScalarProperty Name="min_pick_face" ColumnName="min_pick_face" />
+                <ScalarProperty Name="serial_item" ColumnName="serial_item" />
+                <ScalarProperty Name="cubic_item" ColumnName="cubic_item" />
+                <ScalarProperty Name="square_item" ColumnName="square_item" />
+                <ScalarProperty Name="uom_3pl_chrg" ColumnName="uom_3pl_chrg" />
+                <ScalarProperty Name="unit_price" ColumnName="unit_price" />
+                <ScalarProperty Name="discount" ColumnName="discount" />
+                <ScalarProperty Name="catch_weight_flag" ColumnName="catch_weight_flag" />
+                <ScalarProperty Name="item_version" ColumnName="item_version" />
+                <ScalarProperty Name="origin_country" ColumnName="origin_country" />
+                <ScalarProperty Name="healthcare_data" ColumnName="healthcare_data" />
+                <ScalarProperty Name="ship_packing" ColumnName="ship_packing" />
+                <ScalarProperty Name="humidity" ColumnName="humidity" />
+                <ScalarProperty Name="degree_to" ColumnName="degree_to" />
+                <ScalarProperty Name="degree_fr" ColumnName="degree_fr" />
+                <ScalarProperty Name="remark2" ColumnName="remark2" />
+                <ScalarProperty Name="net_weight" ColumnName="net_weight" />
+                <ScalarProperty Name="hs_code_region" ColumnName="hs_code_region" />
+                <ScalarProperty Name="hs_code" ColumnName="hs_code" />
+                <ScalarProperty Name="inventory_holding_factor" ColumnName="inventory_holding_factor" />
+                <ScalarProperty Name="nesting_factor" ColumnName="nesting_factor" />
+                <ScalarProperty Name="last_update" ColumnName="last_update" />
+                <ScalarProperty Name="maker" ColumnName="maker" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="create_by" ColumnName="create_by" />
+                <ScalarProperty Name="remarks" ColumnName="remarks" />
+                <ScalarProperty Name="others" ColumnName="others" />
+                <ScalarProperty Name="nonstandard_pack" ColumnName="nonstandard_pack" />
+                <ScalarProperty Name="country_origin" ColumnName="country_origin" />
+                <ScalarProperty Name="owner" ColumnName="owner" />
+                <ScalarProperty Name="supplier" ColumnName="supplier" />
+                <ScalarProperty Name="serial_no" ColumnName="serial_no" />
+                <ScalarProperty Name="dimensions" ColumnName="dimensions" />
+                <ScalarProperty Name="weight_required" ColumnName="weight_required" />
+                <ScalarProperty Name="item_class" ColumnName="item_class" />
+                <ScalarProperty Name="item_color" ColumnName="item_color" />
+                <ScalarProperty Name="item_size" ColumnName="item_size" />
+                <ScalarProperty Name="production_dt" ColumnName="production_dt" />
+                <ScalarProperty Name="expiry_dt" ColumnName="expiry_dt" />
+                <ScalarProperty Name="lot_no" ColumnName="lot_no" />
+                <ScalarProperty Name="batch_no" ColumnName="batch_no" />
+                <ScalarProperty Name="bonded_flag" ColumnName="bonded_flag" />
+                <ScalarProperty Name="stack_factor" ColumnName="stack_factor" />
+                <ScalarProperty Name="auto_zoning" ColumnName="auto_zoning" />
+                <ScalarProperty Name="dual_uom" ColumnName="dual_uom" />
+                <ScalarProperty Name="num_serial" ColumnName="num_serial" />
+                <ScalarProperty Name="shelf_life" ColumnName="shelf_life" />
+                <ScalarProperty Name="expiry_prealert" ColumnName="expiry_prealert" />
+                <ScalarProperty Name="export_price" ColumnName="export_price" />
+                <ScalarProperty Name="dealer_price" ColumnName="dealer_price" />
+                <ScalarProperty Name="retail_price" ColumnName="retail_price" />
+                <ScalarProperty Name="ex_work_price" ColumnName="ex_work_price" />
+                <ScalarProperty Name="landed_price" ColumnName="landed_price" />
+                <ScalarProperty Name="fob_price" ColumnName="fob_price" />
+                <ScalarProperty Name="currency" ColumnName="currency" />
+                <ScalarProperty Name="max_stock" ColumnName="max_stock" />
+                <ScalarProperty Name="reorder_level" ColumnName="reorder_level" />
+                <ScalarProperty Name="pick_tolerance" ColumnName="pick_tolerance" />
+                <ScalarProperty Name="quarantine_day" ColumnName="quarantine_day" />
+                <ScalarProperty Name="sample_size" ColumnName="sample_size" />
+                <ScalarProperty Name="tolerance" ColumnName="tolerance" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="default_grade" ColumnName="default_grade" />
+                <ScalarProperty Name="pick_seq" ColumnName="pick_seq" />
+                <ScalarProperty Name="imo_class" ColumnName="imo_class" />
+                <ScalarProperty Name="hazchem_code" ColumnName="hazchem_code" />
+                <ScalarProperty Name="un_code" ColumnName="un_code" />
+                <ScalarProperty Name="dg_flag" ColumnName="dg_flag" />
+                <ScalarProperty Name="image_filename" ColumnName="image_filename" />
+                <ScalarProperty Name="last_stocktake" ColumnName="last_stocktake" />
+                <ScalarProperty Name="last_cycle_count" ColumnName="last_cycle_count" />
+                <ScalarProperty Name="cycle_count_frequency" ColumnName="cycle_count_frequency" />
+                <ScalarProperty Name="abc_value" ColumnName="abc_value" />
+                <ScalarProperty Name="abc_classification" ColumnName="abc_classification" />
+                <ScalarProperty Name="sub_category_5" ColumnName="sub_category_5" />
+                <ScalarProperty Name="sub_category_4" ColumnName="sub_category_4" />
+                <ScalarProperty Name="sub_category_3" ColumnName="sub_category_3" />
+                <ScalarProperty Name="sub_category_2" ColumnName="sub_category_2" />
+                <ScalarProperty Name="sub_category_1" ColumnName="sub_category_1" />
+                <ScalarProperty Name="sub_category" ColumnName="sub_category" />
+                <ScalarProperty Name="category" ColumnName="category" />
+                <ScalarProperty Name="product_group" ColumnName="product_group" />
+                <ScalarProperty Name="brand" ColumnName="brand" />
+                <ScalarProperty Name="storage_uom" ColumnName="storage_uom" />
+                <ScalarProperty Name="storage_group" ColumnName="storage_group" />
+                <ScalarProperty Name="billing_uom" ColumnName="billing_uom" />
+                <ScalarProperty Name="billing_group" ColumnName="billing_group" />
+                <ScalarProperty Name="substitute" ColumnName="substitute" />
+                <ScalarProperty Name="alternate_code" ColumnName="alternate_code" />
+                <ScalarProperty Name="pallet_config" ColumnName="pallet_config" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="product_class" ColumnName="product_class" />
+                <ScalarProperty Name="item_no" ColumnName="item_no" />
+                <ScalarProperty Name="client" ColumnName="client" />
+                <ScalarProperty Name="row_id" ColumnName="row_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="product_uom">
+            <EntityTypeMapping TypeName="similanwms_nhkModel.product_uom">
+              <MappingFragment StoreEntitySet="product_uom">
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="pack_hierarchy" ColumnName="pack_hierarchy" />
+                <ScalarProperty Name="luom_equivalent" ColumnName="luom_equivalent" />
+                <ScalarProperty Name="lowest_uom" ColumnName="lowest_uom" />
+                <ScalarProperty Name="uom_sequence" ColumnName="uom_sequence" />
+                <ScalarProperty Name="item_weight" ColumnName="item_weight" />
+                <ScalarProperty Name="item_volume" ColumnName="item_volume" />
+                <ScalarProperty Name="item_depth" ColumnName="item_depth" />
+                <ScalarProperty Name="item_width" ColumnName="item_width" />
+                <ScalarProperty Name="item_height" ColumnName="item_height" />
+                <ScalarProperty Name="item_qty" ColumnName="item_qty" />
+                <ScalarProperty Name="item_uom" ColumnName="item_uom" />
+                <ScalarProperty Name="item_packing" ColumnName="item_packing" />
+                <ScalarProperty Name="item_no" ColumnName="item_no" />
+                <ScalarProperty Name="client" ColumnName="client" />
+                <ScalarProperty Name="row_id" ColumnName="row_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="product_uom_temp">
+            <EntityTypeMapping TypeName="similanwms_nhkModel.product_uom_temp">
+              <MappingFragment StoreEntitySet="product_uom_temp">
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="pack_hierarchy" ColumnName="pack_hierarchy" />
+                <ScalarProperty Name="luom_equivalent" ColumnName="luom_equivalent" />
+                <ScalarProperty Name="lowest_uom" ColumnName="lowest_uom" />
+                <ScalarProperty Name="uom_sequence" ColumnName="uom_sequence" />
+                <ScalarProperty Name="item_weight" ColumnName="item_weight" />
+                <ScalarProperty Name="item_volume" ColumnName="item_volume" />
+                <ScalarProperty Name="item_depth" ColumnName="item_depth" />
+                <ScalarProperty Name="item_width" ColumnName="item_width" />
+                <ScalarProperty Name="item_height" ColumnName="item_height" />
+                <ScalarProperty Name="item_qty" ColumnName="item_qty" />
+                <ScalarProperty Name="item_uom" ColumnName="item_uom" />
+                <ScalarProperty Name="item_packing" ColumnName="item_packing" />
+                <ScalarProperty Name="item_no" ColumnName="item_no" />
+                <ScalarProperty Name="client" ColumnName="client" />
+                <ScalarProperty Name="key_num" ColumnName="key_num" />
+                <ScalarProperty Name="row_id" ColumnName="row_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
